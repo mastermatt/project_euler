@@ -6,6 +6,8 @@ mod p0005;
 mod p0006;
 mod p0007;
 mod p0008;
+mod p0009;
+mod p0010;
 
 mod p0540;
 
