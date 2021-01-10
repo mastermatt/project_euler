@@ -13,6 +13,8 @@ mod p0012;
 
 mod p0540;
 
+mod util;
+
 fn main() {
     println!("run `cargo test`");
 }
