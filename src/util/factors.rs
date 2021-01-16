@@ -5,13 +5,14 @@ pub fn count_divisors(num: u64) -> u32 {
     let mut num_divisors = 1;
     let mut factor = 2; // Candidate for prime factor of `n`
     let mut n = num;
+    let mut exponent;
 
     // If `n` is not a prime number then it must have one factor
     // which is <= `sqrt(n)`, so we try these first:
     while factor * factor <= n {
         if n % factor == 0 {
             // `factor` is a prime factor of `n`, determine the exponent:
-            let mut exponent = 0;
+            exponent = 0;
             loop {
                 n /= factor;
                 exponent += 1;
