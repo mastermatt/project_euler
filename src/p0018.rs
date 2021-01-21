@@ -36,15 +36,29 @@ fn compute(input: Vec<u32>) -> u32 {
     let mut curr_row_len = num_rows(&input);
     let mut curr_row_idx = input.len() - curr_row_len;
     let mut scratch = vec![0; curr_row_len + 1];
+    let mut vectors = vec![0; input.len()];
 
     while curr_row_len != 0 {
         for i in 0..curr_row_len {
+            vectors[curr_row_idx + i] = if scratch[i] > scratch[i + 1] { 0 } else { 1 }; // 0 if the final trace goes left, 1 if right
             scratch[i] = input[curr_row_idx + i] + scratch[i].max(scratch[i + 1]);
         }
 
         curr_row_len -= 1;
         curr_row_idx -= curr_row_len;
     }
+
+    println!("{:?}", vectors);
+    // [1, 1, 1, 1, 1, 0, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 0, 0, 1, 1, 0, 0, 1, 0, 1, 1, 1, 0, 0, 1, 1, 0, 1, 1, 0, 0, 1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+
+    let mut path = vec![0; num_rows(&input)];
+    let mut idx = 0;
+    for row in 0..num_rows(&input) {
+        path[row] = input[idx];
+        idx += row + 1 + vectors[idx];
+    }
+    println!("{:?}", path);
+    // [75, 64, 82, 87, 82, 75, 73, 28, 83, 32, 91, 78, 58, 73, 93]
 
     scratch[0]
 }
