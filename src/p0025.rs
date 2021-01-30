@@ -33,7 +33,7 @@ fn compute(digits: usize) -> usize {
     for i in 3.. {
         let c = a + &b;
 
-        // I found that string conversion fo the BigUint was pretty slow and caused the problem to
+        // I found that string conversion of the BigUint was pretty slow and caused the problem to
         // take ~600ms. But by digging around the implementation of BigUint, I found this size
         // approximation in `to_radix_digits_le` which dropped the runtime for the problem to ~8ms.
         let approx_len = ((c.bits() as f64) / ten_log2).ceil() as usize;
