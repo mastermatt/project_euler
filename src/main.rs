@@ -24,6 +24,7 @@ mod p0023;
 mod p0024;
 mod p0025;
 mod p0026;
+mod p0027;
 
 mod p0067;
 mod p0540;
